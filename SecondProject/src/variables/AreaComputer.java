@@ -1,19 +1,20 @@
 package variables;
 
 public class AreaComputer {
+	
 	  /** Main method */
 	  public static void main(String[] args) {
-	    double radius;
+		final double PI = 3.14159; 
+		final int SIZE = 32;
+
 	    double area;
-	    
-	    // Assign a radius
-	    radius = 20;
+	       
 	    
 	    // Compute area
-	    area = radius * radius * 3.14159;
+	    area = SIZE * SIZE * PI;
 	    
 	    // Display results
 	    System.out.println("The area for the circle of radius " +
-	      radius + " is " + area);
+	    		SIZE + " is " + area);
 	  }
 	}
