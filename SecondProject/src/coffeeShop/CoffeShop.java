@@ -4,11 +4,13 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Scanner;
 
 public class CoffeShop {
 
 	List<Product> products = new ArrayList<>();
-
+	Scanner input = new Scanner(System.in);
+	
 	public void setupProducts() {
 		Product coffee = new Product();
 		coffee.setName("Coffee");
@@ -44,10 +46,30 @@ public class CoffeShop {
 		}
 	}
 
+	public int userSelect() {
+		System.out.println("1) Print the menu items and prices");
+		System.out.println("2) Add an item to your order");
+		System.out.println("3) Print the items in your order");
+		System.out.println("4) Checkout.");
+		
+		System.out.println("\nWhat do you want to do? ");
+		int select = input.nextInt();
+		
+		return select;
+	}
+	
 	public static void main(String[] args) {
 		CoffeShop cf = new CoffeShop();
 		cf.setupProducts();
-		cf.printAllProducts();
+		
+		int userSelection = cf.userSelect();
+		
+		if (userSelection ==1) {
+			cf.printAllProducts();
+		} else {
+			System.out.println("User input "+userSelection+" is unknown.");
+		}
+		
 	}
 
 	public static void main2(String[] args) {
