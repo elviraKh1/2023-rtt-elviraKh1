@@ -1,5 +1,7 @@
 package coffeeShop;
 
+import java.text.DecimalFormat;
+
 public class Product {
 
 	private String name;
@@ -24,6 +26,12 @@ public class Product {
 		return price;
 	}
 
+	public String getFormattedPrice() {
+		DecimalFormat df = new DecimalFormat("$0.00");
+		return df.format(price);
+	}
+
+	
 	public void setPrice(double price) {
 		this.price = price;
 	}
