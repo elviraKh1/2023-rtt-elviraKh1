@@ -3,21 +3,21 @@ package com.perscholas.java_basics;
 public class JavaBasicsClass {
 
 	public static void main(String[] args) {
-//		sumTwoInts(1, 2);
-//		printLine();
-//
-//		sumTwoDouble(2.5, 5.5);
-//		printLine();
-//
-//		sumIntegerDouble(2.5, 4);
-//		printLine();
+		sumTwoInts(1, 2);
+		printLine();
+
+		sumTwoDouble(2.5, 5.5);
+		printLine();
+
+		sumIntegerDouble(2.5, 4);
+		printLine();
 
 		divisionIntegers();
-//		namedConstants();
-//		printLine();
-//
-//		cafe();
-//		printLine();
+		namedConstants();
+		printLine();
+
+		cafe();
+		printLine();
 	}
 
 	/**
