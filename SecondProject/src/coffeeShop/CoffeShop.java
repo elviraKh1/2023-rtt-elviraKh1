@@ -25,6 +25,10 @@ public class CoffeShop {
 		cookie.setPrice(6.77);
 		products.add(cookie);
 
+		Product juice = new Product();
+		juice.setName("Apple juice");
+		juice.setPrice(2.23);
+		products.add(juice);		
 //		printProduct(coffee);
 //		printProduct(tea);
 //		printProduct(cookie);
