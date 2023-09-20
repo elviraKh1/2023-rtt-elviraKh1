@@ -1,5 +1,7 @@
 package com.perscholas.java_basics;
 
+import java.text.DecimalFormat;
+
 public class JavaBasicsClass {
 
 	public static void main(String[] args) {
@@ -51,7 +53,7 @@ public class JavaBasicsClass {
 		int sumInt = (int) (d + i);
 		double sumDouble = d + i;
 		System.out.println("Sum casting to int " + sumInt);
-		System.out.println("Sum autocasting to double  " + sumDouble + " more accurate answer with double");
+		System.out.println("More accurate answer with sum in double " + sumDouble );
 	}
 
 	/**
@@ -66,7 +68,8 @@ public class JavaBasicsClass {
 		int d2 = 2;
 		int divInt = d1/d2;
 		double divDecimal = d1/d2;
-		System.out.printf("divides the larger number by the smaller number %d/%d=%d \n", d1, d2, divInt );
+		System.out.println("  ======= int "+ divInt +"  ======== double "+ divDecimal);
+		System.out.printf("divides the larger number by the smaller number (cast to int) %d/%d=%d \n", d1, d2, divInt );
 		System.out.printf("divides the larger number by the smaller number %d/%d=%.2f \n", d1, d2, divDecimal  );
 		double dd1 = 13.0;
 		int dd2 = 2;
@@ -105,7 +108,9 @@ public class JavaBasicsClass {
 
 		double subtotal = 3 * coffee + 4 * cappuccino + 2 * espresso;
 		double totalSale = subtotal + subtotal * SALES_TAX / 100;
-		System.out.printf("TotalSale is %.2f \n", totalSale);
+		System.out.printf("Format with printf and 2f :  TotalSale is %.2f \n", totalSale);
+		DecimalFormat df = new DecimalFormat("$#,###0.00");
+		System.out.println("Format with DecimalFormat : TotalSale is " + df.format(totalSale));
 	}
 
 	static void printLine() {
