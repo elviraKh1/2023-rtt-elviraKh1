@@ -21,5 +21,6 @@ public class Bmi {
 		else
 			System.out.println("Obese");
 		System.out.print("\nThe Body Mass Index (BMI) is " + BMI + " kg/m2");
+		sc.close();
 	}
 }
