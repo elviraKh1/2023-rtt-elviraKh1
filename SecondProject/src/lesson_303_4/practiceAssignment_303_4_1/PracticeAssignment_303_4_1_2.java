@@ -1,4 +1,4 @@
-package lesson_303_4;
+package lesson_303_4.practiceAssignment_303_4_1;
 
 /**
  * Write a program that declares 1 integer variable x, and then assigns 7 to it.

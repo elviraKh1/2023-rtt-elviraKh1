@@ -1,8 +1,6 @@
-package lesson_303_4;
+package lesson_303_4.practiceAssignment_303_4_1;
 
 import java.util.Scanner;
-
-import lesson_303_4.EnumSwitchExample.Cars;
 
 /**
  * Create a program that lets the users input their filing status and income.

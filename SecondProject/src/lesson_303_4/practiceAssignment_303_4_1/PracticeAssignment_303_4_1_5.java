@@ -1,4 +1,4 @@
-package lesson_303_4;
+package lesson_303_4.practiceAssignment_303_4_1;
 
 import java.util.Scanner;
 
