@@ -60,7 +60,7 @@ public class CoffeShop {
 			sum+=product.getPrice();
 		}
 		System.out.println("\t\t------");
-		System.out.printf("Total cost:\t$%.2f\n", sum);
+		//System.out.printf("Total cost:\t$%.2f\n", sum);
 		DecimalFormat df = new DecimalFormat("$0.00");
 		System.out.println("Total cost:\t"+ df.format(sum));
 	}
