@@ -1,4 +1,4 @@
-package practice.assignment_303_2_3;
+package lesson_303_2.practice.assignment_303_2_3;
 
 /**
  * Write a program that declares an integer a variable x, assigns the value 2 to

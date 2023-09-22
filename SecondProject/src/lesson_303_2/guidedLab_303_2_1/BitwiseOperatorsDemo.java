@@ -1,4 +1,4 @@
-package guidedLab_303_2_1;
+package lesson_303_2.guidedLab_303_2_1;
 
 public class BitwiseOperatorsDemo {
 
