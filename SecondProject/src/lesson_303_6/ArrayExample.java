@@ -61,6 +61,18 @@ public class ArrayExample {
 			}
 		}
 		System.out.println(notNull + " values are not null");
+		
+		
+		
+		//enhanced for loop
+		int notNullEnhanced = 0;
+		for (String val: stringArray) {
+			if (val != null) {
+				notNullEnhanced++;
+			}
+		}
+		System.out.println(notNullEnhanced + " values are not null");
+		
 
 		// write a for loop that tells me the last position of null in the array
 		// write a for loop that starts at the final position in the array and counts
@@ -72,7 +84,11 @@ public class ArrayExample {
 				break;
 			}
 		}
-		System.out.println("Position of the last null is " + lastNull);
+		if (lastNull == -1) {
+			System.out.println("The array doesnt have a null");
+		} else {
+			System.out.println("Position of the last null is " + lastNull);
+		}
 
 		String letters = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z";
 

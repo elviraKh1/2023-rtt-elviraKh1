@@ -26,7 +26,7 @@ public class GreatestCommonDivisor {
 
 		int gcn = 1;
 		int max = Math.max(n1, n2);
-		for (int k = max; k >= 2; k--) {
+		for (int k = max; k >= 1; k--) {
 			if (n1 % k == 0 && n2 % k == 0) {
 				gcn = k;
 				break;
@@ -37,6 +37,8 @@ public class GreatestCommonDivisor {
 		} else {
 			System.out.println("There is no GSM for " + n1 + " and " + n2);
 		}
+		System.out.println(gcd(17,256));
+		
 		input.close();
 	}
 
@@ -52,5 +54,13 @@ public class GreatestCommonDivisor {
 		}
 		return n;
 	}
+	
+	static int gcd(int a, int b)
+    {
+        if (b == 0)
+            return a;
+         else
+            return gcd(b, a % b);
+    }
 
 }
