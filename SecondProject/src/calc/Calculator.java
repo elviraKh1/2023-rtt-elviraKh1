@@ -67,6 +67,7 @@ public class Calculator {
 		case 3:
 			if (num2 == 0) {
 				System.out.println("Value of second nummber can't be 0!");
+				return;
 			} else {
 				result = getDivision(num1, num2);
 			}
