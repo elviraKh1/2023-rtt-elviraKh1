@@ -16,7 +16,7 @@ public class ScannerExample {
 		input.close();
 	}
 
-	public static void main(String[] args) {
+	public static void main67(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		int i = scan.nextInt();
 		double d = scan.nextDouble();
@@ -30,6 +30,10 @@ public class ScannerExample {
 		System.out.println("Double: " + d);
 		System.out.println("Int: " + i);
 		scan.close();
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(Integer.MAX_VALUE+1);
 	}
 
 }
