@@ -1,5 +1,6 @@
 package lesson_303_05.practiceAssignment_303_5_2;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -15,7 +16,7 @@ import java.util.Scanner;
  */
 public class GreatestCommonDivisor {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws GCDNumberException {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter two positive integers: ");
 		int n1 = readPositiveNumber(input);
@@ -42,16 +43,19 @@ public class GreatestCommonDivisor {
 		input.close();
 	}
 
-	public static int readPositiveNumber(Scanner scanner) {
+	public static int readPositiveNumber(Scanner scanner) throws GCDNumberException {
 		int n = -1;
-		while (n <= 0) {
-			System.out.println("Enter a positive integers number");
-			n = scanner.nextInt();
-
-			if (n <= 0) {
-				System.out.println("Error : must be a positive number");
+			while (n <= 0) {
+				System.out.println("Enter a positive integers number");
+				try {
+					n = scanner.nextInt();
+				}catch (InputMismatchException ex){
+					throw new GCDNumberException(n+ " is not a numeric value");
+				}
+				if (n <= 0) {
+					System.out.println("Error : must be a positive number");
+				}
 			}
-		}
 		return n;
 	}
 	
