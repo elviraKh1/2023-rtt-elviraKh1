@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class CoffeShop {
 
@@ -13,7 +14,7 @@ public class CoffeShop {
 
 	Scanner input = new Scanner(System.in);
 
-	public void setupProducts() {
+	public List<Product> setupProducts() {
 		Product coffee = new Product();
 		coffee.setName("Coffee");
 		coffee.setPrice(5.4);
@@ -33,6 +34,7 @@ public class CoffeShop {
 		juice.setName("Juice");
 		juice.setPrice(2.25);
 		products.add(juice);
+		return products;
 //		printProduct(coffee);
 //		printProduct(tea);
 //		printProduct(cookie);
@@ -100,7 +102,17 @@ public class CoffeShop {
 
 	public static void main(String[] args) {
 		CoffeShop cf = new CoffeShop();
-		cf.setupProducts();
+		List<Product> products2= cf.setupProducts();
+
+		List<Product> cheap= new ArrayList<>();
+		for(Product product: products2){
+			if (product.getPrice()<6.0){
+				cheap.add(product);
+			}
+		}
+
+		List<Product> streamCheap =products2.stream().filter(product -> product.getPrice()<6.0)
+				.collect(Collectors.toList());
 
 		while (true) {
 
