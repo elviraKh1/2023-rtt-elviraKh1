@@ -19,7 +19,9 @@ FROM
 
 select o.city from offices o ;
 
-select ofc.city, sum(od.quantity_ordered) from orderdetails od, orders o, customers c , offices ofc where o.id=od.order_id  and c.id= o.customer_id and c.sales_rep_employee_id  IN (SELECT id FROM employees e2 WHERE e2.office_id = ofc.id) group by ofc.city ;
+select ofc.city, sum(od.quantity_ordered) from orderdetails od, orders o, customers c , offices ofc
+where o.id=od.order_id  and c.id= o.customer_id and c.sales_rep_employee_id  IN (SELECT id FROM employees e2 WHERE e2.office_id = ofc.id) group by ofc.city ;
 
  -- SELECT c.id, ofc.city FROM customers c,  offices ofc WHERE c.sales_rep_employee_id IN (SELECT id FROM employees e2 WHERE e2.office_id = ofc.id and ofc.id=1) ;
- select ofc.city, sum(od.quantity_ordered) from orderdetails od, orders o where o.id=od.order_id  and o.customer_id in (SELECT c.id FROM customers c,  offices ofc WHERE c.sales_rep_employee_id IN (SELECT id FROM employees e2 WHERE e2.office_id = ofc.id ) ;
+ select ofc.city, sum(od.quantity_ordered) from orderdetails od, orders o
+ where o.id=od.order_id  and o.customer_id in (SELECT c.id FROM customers c,  offices ofc WHERE c.sales_rep_employee_id IN (SELECT id FROM employees e2 WHERE e2.office_id = ofc.id ) ;
