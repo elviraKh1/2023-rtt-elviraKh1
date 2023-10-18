@@ -14,25 +14,25 @@ import java.util.Scanner;
  * parameters and return a double ...
  */
 public class Calculator {
-
+	Scanner scanner = new Scanner(System.in);
 	public static void main(String[] args) {
 		Calculator c = new Calculator();
 		c.menu();
 	}
 
 	private void menu() {
-		Scanner scanner = new Scanner(System.in);
+		
 
 		while (true) {
 			System.out.println("\n==========Calculator===========\n");
 
 			System.out.print("Enter number 1: ");
-			double num1 = enterNumber(scanner);
+			double num1 = enterNumber();
 
 			System.out.print("Enter number 2: ");
-			double num2 = enterNumber(scanner);
+			double num2 = enterNumber();
 
-			int operation = choseOperation(scanner);
+			int operation = choseOperation();
 			if (operation == 4) {
 				scanner.close();
 				System.exit(0);
@@ -42,14 +42,14 @@ public class Calculator {
 		}
 	}
 
-	private int choseOperation(Scanner scanner) {
+	private int choseOperation( ) {
 		System.out.println("Choose calc operation number 1-4 :");
 		System.out.println("0) Addition");
 		System.out.println("1) Substraction");
 		System.out.println("2) Multiplication");
 		System.out.println("3) Division");
 		System.out.println("4) Exit");
-		return (int) enterNumber(scanner);
+		return (int) enterNumber();
 	}
 
 	private void executeOperation(int operation, double num1, double num2) {
@@ -79,7 +79,7 @@ public class Calculator {
 		getFormattedString(num1, num2, operation, result);
 	}
 
-	private double enterNumber(Scanner scanner) {
+	private double enterNumber( ) {
 		boolean isNumber = false;
 		double n = 0;
 		while (!isNumber) {
