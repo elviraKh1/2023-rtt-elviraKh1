@@ -52,7 +52,7 @@ public class CreataAndUpdateExample {
 	}
 
 	public void listQuery() {
-		List<Customer> customers = customerDAO.findByFirstName("Afdam");
+		List<Customer> customers = customerDAO.findByFirstName("Adam");
 		System.out.println("We found "+ customers.size() + " records in DB ");
 	
 	}

@@ -25,5 +25,6 @@
 hs_err_pid*
 replay_pid*
 database/target/
+database/.settings/
 SecondProject/bin/lesson_304/
 bin/lesson_304/

@@ -6,8 +6,11 @@ import java.util.Scanner;
 
 import org.perscholas.database.entity.Customer;
 import org.perscholas.database.entity.Order;
+import org.perscholas.database.entity.OrderDetails;
+import org.perscholas.database.entity.Product;
 import org.perscholas.database.entity.dao.CustomerDAO;
 import org.perscholas.database.entity.dao.OrderDAO;
+import org.perscholas.database.entity.dao.ProductsDAO;
 
 public class RunnerOrder {
 
@@ -22,18 +25,41 @@ public class RunnerOrder {
 	}
 
 	public static void main(String[] args) {
-
-		Scanner scanner = new Scanner(System.in);
-		System.out.print("Enter customer id: ");
-		int customerId = scanner.nextInt();
-		System.out.println();
-		
 		RunnerOrder runner = new RunnerOrder();
-		runner.getOrdersByCustomer(customerId);
-		runner.createOrderByCustomerId(customerId);
-		scanner.close();
+		
+//		Scanner scanner = new Scanner(System.in);
+//		System.out.print("Enter customer id: ");
+//		int customerId = scanner.nextInt();
+//		System.out.println();
+//		scanner.close();
+//		
+//		runner.getOrdersByCustomer(customerId);
+//		runner.createOrderByCustomerId(customerId);
+//		runner.queryOrder();
+		runner.queryProduct();
+	}
+	
+	public void queryOrder() {
+		Order o =orderDAO.findById(10100);
+		Customer c = o.getCustomer();
+		System.out.println("Order "+ o.getId() + " was made by customer "+c.getCustomerName());
+		
+		List<Order> orders = c.getOrders();
+		System.out.println(orders);
+	
 	}
 
+	public void queryProduct() {
+		ProductsDAO productDAO = new ProductsDAO();
+		Product product = productDAO.findById(1);
+		System.out.println(product);
+		
+		List<OrderDetails> od = product.getOrdersDetail();
+		System.out.println(od);
+	
+	}
+	
+	
 	private void createOrderByCustomerId(int customerId) {
 		CustomerDAO cdao = new CustomerDAO();
 		Customer customer = cdao.findById(customerId);
