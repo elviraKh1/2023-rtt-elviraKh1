@@ -1,0 +1,56 @@
+package database;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Scanner;
+
+import org.perscholas.database.entity.Customer;
+import org.perscholas.database.entity.Order;
+import org.perscholas.database.entity.dao.CustomerDAO;
+import org.perscholas.database.entity.dao.OrderDAO;
+
+public class RunnerOrder {
+
+	private OrderDAO orderDAO = new OrderDAO();
+
+	private List<Order> getOrdersByCustomer(int customerId) {
+		List<Order> orders = orderDAO.findByCustomerId(customerId);
+		System.out.println("--------Orders By Customer id----------");
+		System.out.println(orders.size()+ " records were found in database ");
+		System.out.println(orders);
+		return orders;
+	}
+
+	public static void main(String[] args) {
+
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Enter customer id: ");
+		int customerId = scanner.nextInt();
+		System.out.println();
+		
+		RunnerOrder runner = new RunnerOrder();
+		runner.getOrdersByCustomer(customerId);
+		runner.createOrderByCustomerId(customerId);
+		scanner.close();
+	}
+
+	private void createOrderByCustomerId(int customerId) {
+		CustomerDAO cdao = new CustomerDAO();
+		Customer customer = cdao.findById(customerId);
+		if (customer != null) {
+			Order order = new Order();
+			order.setCustomerId(customerId);
+			order.setOrderDate(new Date());
+			order.setRequiredDate(new Date());
+			order.setStatus("In process");
+			order.setComments("test for Hibernate ");
+			System.out.println("--------Order created By Customer id----------");
+			System.out.println("order id before insert is "+order.getId());
+			orderDAO.save(order);
+			System.out.println("order id after insert is "+order.getId());
+		} else {
+			System.out.println("Customer with id "+customerId+" doesnt find in DB");
+		}
+	}
+
+}

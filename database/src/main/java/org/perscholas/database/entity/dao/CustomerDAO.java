@@ -2,7 +2,9 @@ package org.perscholas.database.entity.dao;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transaction;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,7 +12,8 @@ import org.hibernate.cfg.Configuration;
 import org.perscholas.database.entity.Customer;
 
 public class CustomerDAO {
-
+//the desired behavior is return single Customer
+// null is indicating that is not found
 	public Customer findById(Integer id) {
 		SessionFactory factory = new Configuration().configure().buildSessionFactory();
 		Session session = factory.openSession();
@@ -19,8 +22,12 @@ public class CustomerDAO {
 		TypedQuery<Customer> query = session.createQuery(hql, Customer.class);
 		query.setParameter("id", id);
 
-		Customer result = query.getSingleResult();
-		return result;
+		try {
+			Customer result = query.getSingleResult();
+			return result;
+		} catch (NoResultException nre) {
+			return null;
+		}
 	}
 
 	public List<Customer> findByFirstName(String fname) {
@@ -32,5 +39,21 @@ public class CustomerDAO {
 
 		List<Customer> result = query.getResultList();
 		return result;
+	}
+	
+	public void save(Customer customer) {
+		SessionFactory factory = new Configuration().configure().buildSessionFactory();
+		Session session = factory.openSession();
+		org.hibernate.Transaction t = session.beginTransaction();
+//		if (customer.getId())
+		session.saveOrUpdate(customer);
+		t.commit();
+	
+//		String hql = "From Customer c WHERE c.contactFirstName = :firstname";
+//		TypedQuery<Customer> query = session.createQuery(hql, Customer.class);
+//		query.setParameter("firstname", fname);
+//
+//		List<Customer> result = query.getResultList();
+//		return result;
 	}
 }
