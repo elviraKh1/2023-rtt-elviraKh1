@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "orderdetails")
-public class OrderDetails {
+public class OrderDetail {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -97,8 +97,7 @@ public class OrderDetails {
 
 	@Override
 	public String toString() {
-		return "OrderDetails [id=" + id + ", orderId=" + orderId + ", productId=" + productId + ", product=" + product
-				+ ", quantityOrdered=" + quantityOrdered + ", priceEach=" + priceEach + ", orderLineNumber="
+		return "\n\nOrderDetails [id=" + id + ", orderId=" + orderId + ", productId=" + productId +  ", quantityOrdered=" + quantityOrdered + ", priceEach=" + priceEach + ", orderLineNumber="
 				+ orderLineNumber + "]";
 	}	
 	

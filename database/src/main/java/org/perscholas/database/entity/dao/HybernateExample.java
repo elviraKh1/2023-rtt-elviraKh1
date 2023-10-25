@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.perscholas.database.entity.Customer;
 import org.perscholas.database.entity.Order;
-import org.perscholas.database.entity.OrderDetails;
+import org.perscholas.database.entity.OrderDetail;
 import org.perscholas.database.entity.Product;
 
 public class HybernateExample {
@@ -25,8 +25,8 @@ public class HybernateExample {
 		System.out.println(product.getId()+" | "+ product.getProductName());		
 
 		OrderDetailDAO odDAO = new OrderDetailDAO();
-		OrderDetails orderDetails = odDAO.findById(1);
-		System.out.println(orderDetails.getId()+" | "+ orderDetails.getProductId()+" | "+ orderDetails.getOrderLineNumber());		
+		OrderDetail orderDetail = odDAO.findById(1);
+		System.out.println(orderDetail.getId()+" | "+ orderDetail.getProductId()+" | "+ orderDetail.getOrderLineNumber());
 		
 
 		

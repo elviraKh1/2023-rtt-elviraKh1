@@ -2,11 +2,10 @@ package database;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
 
 import org.perscholas.database.entity.Customer;
 import org.perscholas.database.entity.Order;
-import org.perscholas.database.entity.OrderDetails;
+import org.perscholas.database.entity.OrderDetail;
 import org.perscholas.database.entity.Product;
 import org.perscholas.database.entity.dao.CustomerDAO;
 import org.perscholas.database.entity.dao.OrderDAO;
@@ -54,7 +53,7 @@ public class RunnerOrder {
 		Product product = productDAO.findById(1);
 		System.out.println(product);
 		
-		List<OrderDetails> od = product.getOrdersDetail();
+		List<OrderDetail> od = product.getOrdersDetail();
 		System.out.println(od);
 	
 	}

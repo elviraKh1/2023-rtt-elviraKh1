@@ -25,7 +25,7 @@ public class Product {
 	@OneToMany(mappedBy = "product",// map to 	private Customer customer in Order;
 			fetch = FetchType.LAZY,
 			cascade = CascadeType.ALL)
-	private List<OrderDetails> ordersDetail;
+	private List<OrderDetail> ordersDetail;
 	
 	@Column(name = "product_code")
 	private String productCode;	
@@ -134,11 +134,11 @@ public class Product {
 		this.msrp = msrp;
 	}
 
-	public List<OrderDetails> getOrdersDetail() {
+	public List<OrderDetail> getOrdersDetail() {
 		return ordersDetail;
 	}
 
-	public void setOrdersDetail(List<OrderDetails> ordersDetail) {
+	public void setOrdersDetail(List<OrderDetail> ordersDetail) {
 		this.ordersDetail = ordersDetail;
 	}
 
