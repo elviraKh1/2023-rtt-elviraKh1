@@ -34,7 +34,7 @@ public class RunnerOrder {
 //		
 //		runner.getOrdersByCustomer(customerId);
 //		runner.createOrderByCustomerId(customerId);
-//		runner.queryOrder();
+		runner.queryOrder();
 		runner.queryProduct();
 	}
 	
@@ -44,7 +44,13 @@ public class RunnerOrder {
 		System.out.println("Order "+ o.getId() + " was made by customer "+c.getCustomerName());
 		
 		List<Order> orders = c.getOrders();
-		System.out.println(orders);
+		//System.out.println(orders);
+
+		for (Order order: orders)
+		{
+			System.out.println(order);
+			System.out.println(order.getOrdersDetail());
+		}
 	
 	}
 

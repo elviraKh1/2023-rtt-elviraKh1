@@ -1,17 +1,8 @@
 package org.perscholas.database.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -21,6 +12,10 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
+	@OneToMany(mappedBy = "order",
+			fetch = FetchType.LAZY,
+			cascade = CascadeType.ALL)
+	private List<OrderDetail> ordersDetail;
 
 	@Column(name = "customer_id", insertable = false, updatable = false)
 	private Integer customerId;
@@ -109,6 +104,14 @@ public class Order {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	public List<OrderDetail> getOrdersDetail() {
+		return ordersDetail;
+	}
+
+	public void setOrdersDetail(List<OrderDetail> ordersDetail) {
+		this.ordersDetail = ordersDetail;
 	}
 
 	@Override

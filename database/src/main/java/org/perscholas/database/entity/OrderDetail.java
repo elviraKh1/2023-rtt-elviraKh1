@@ -19,9 +19,12 @@ public class OrderDetail {
 	@Column(name = "id")
 	private Integer id;
 
-	@Column(name = "order_id")
-	private Integer orderId;	
+	@Column(name = "order_id", insertable = false, updatable = false)
+	private Integer orderId;
 
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	@JoinColumn(name = "order_id", nullable = false)
+	private Order order;
 
 	@Column(name = "product_id", insertable = false, updatable = false)
 	private Integer productId;	
@@ -99,8 +102,13 @@ public class OrderDetail {
 	public String toString() {
 		return "\n\nOrderDetails [id=" + id + ", orderId=" + orderId + ", productId=" + productId +  ", quantityOrdered=" + quantityOrdered + ", priceEach=" + priceEach + ", orderLineNumber="
 				+ orderLineNumber + "]";
-	}	
-	
-	
-	
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
 }

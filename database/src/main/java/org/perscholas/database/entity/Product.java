@@ -22,11 +22,11 @@ public class Product {
 	@Column(name = "id")
 	private Integer id;
 	
-	@OneToMany(mappedBy = "product",// map to 	private Customer customer in Order;
+	@OneToMany(mappedBy = "product",
 			fetch = FetchType.LAZY,
 			cascade = CascadeType.ALL)
 	private List<OrderDetail> ordersDetail;
-	
+
 	@Column(name = "product_code")
 	private String productCode;	
 	
