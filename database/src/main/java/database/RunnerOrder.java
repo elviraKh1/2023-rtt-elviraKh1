@@ -21,7 +21,8 @@ public class RunnerOrder {
 		System.out.println("--------Orders By Customer id----------");
 		System.out.println(orders.size()+ " records were found in database ");
 		for (Order order: orders) {
-			System.out.println(order);
+			System.out.println(order.getId()+" | "+ order.getStatus());
+			System.out.println(order.getCustomer());
 			System.out.println(order.getOrdersDetail());
 		}
 		return orders;

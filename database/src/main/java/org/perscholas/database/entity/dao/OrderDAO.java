@@ -22,6 +22,7 @@ public class OrderDAO {
 		
 		try {
 			Order result = query.getSingleResult();
+			session.close();
 			return result;
 		} catch (NoResultException nre) {
 			return null;

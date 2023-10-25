@@ -13,7 +13,7 @@ public class Order {
 	@Column(name = "id")
 	private Integer id;
 	@OneToMany(mappedBy = "order",
-			fetch = FetchType.LAZY,
+			fetch = FetchType.EAGER,
 			cascade = CascadeType.ALL)
 	private List<OrderDetail> ordersDetail;
 
@@ -114,12 +114,12 @@ public class Order {
 		this.ordersDetail = ordersDetail;
 	}
 
-	@Override
-	public String toString() {
-		return "\nOrder [id=" + id + ", customerId=" + customer.getId() + ", customer=" + customer.getCustomerName() + ", orderDate=" + orderDate
-				+ ", requiredDate=" + requiredDate + ", shippedDate=" + shippedDate + ", status=" + status
-				+ ", comments=" + comments + "]\n\n";
-	}
+//	@Override
+//	public String toString() {
+//		return "\nOrder [id=" + id + ", customerId=" + customer.getId() + ", customer=" + customer.getCustomerName() + ", orderDate=" + orderDate
+//				+ ", requiredDate=" + requiredDate + ", shippedDate=" + shippedDate + ", status=" + status
+//				+ ", comments=" + comments + "]\n\n";
+//	}
 
 	
 	

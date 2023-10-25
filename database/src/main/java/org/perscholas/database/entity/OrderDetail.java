@@ -22,14 +22,14 @@ public class OrderDetail {
 //	@Column(name = "order_id", insertable = false, updatable = false)
 //	private Integer orderId;
 
-	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "order_id", nullable = false)
 	private Order order;
 
 //	@Column(name = "product_id", insertable = false, updatable = false)
 //	private Integer productId;
 
-	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "product_id", nullable = false)
 	private Product product;
 	

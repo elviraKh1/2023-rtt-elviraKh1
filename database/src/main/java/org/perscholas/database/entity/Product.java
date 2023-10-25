@@ -23,7 +23,7 @@ public class Product {
 	private Integer id;
 	
 	@OneToMany(mappedBy = "product",
-			fetch = FetchType.LAZY,
+			fetch = FetchType.EAGER,
 			cascade = CascadeType.ALL)
 	private List<OrderDetail> ordersDetail;
 
