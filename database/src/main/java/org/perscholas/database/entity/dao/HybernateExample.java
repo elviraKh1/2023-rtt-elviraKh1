@@ -26,7 +26,7 @@ public class HybernateExample {
 
 		OrderDetailDAO odDAO = new OrderDetailDAO();
 		OrderDetail orderDetail = odDAO.findById(1);
-		System.out.println(orderDetail.getId()+" | "+ orderDetail.getProductId()+" | "+ orderDetail.getOrderLineNumber());
+		System.out.println(orderDetail.getId()+" | "+ " | "+ orderDetail.getOrderLineNumber());
 		
 
 		

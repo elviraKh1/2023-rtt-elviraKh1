@@ -2,6 +2,7 @@ package database;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 import org.perscholas.database.entity.Customer;
 import org.perscholas.database.entity.Order;
@@ -19,23 +20,28 @@ public class RunnerOrder {
 		List<Order> orders = orderDAO.findByCustomerId(customerId);
 		System.out.println("--------Orders By Customer id----------");
 		System.out.println(orders.size()+ " records were found in database ");
-		System.out.println(orders);
+		for (Order order: orders) {
+			System.out.println(order);
+			System.out.println(order.getOrdersDetail());
+		}
 		return orders;
 	}
 
 	public static void main(String[] args) {
 		RunnerOrder runner = new RunnerOrder();
 		
-//		Scanner scanner = new Scanner(System.in);
-//		System.out.print("Enter customer id: ");
-//		int customerId = scanner.nextInt();
-//		System.out.println();
-//		scanner.close();
-//		
-//		runner.getOrdersByCustomer(customerId);
-//		runner.createOrderByCustomerId(customerId);
-		runner.queryOrder();
-		runner.queryProduct();
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Enter customer id: ");
+		int customerId = scanner.nextInt();
+		System.out.println();
+
+		runner.getOrdersByCustomer(customerId);
+		runner.createOrderByCustomerId(customerId);
+//		runner.queryOrder();
+//		runner.queryProduct();
+
+		runner.queryListProduct("Harley Davidson Ultimate Chopper");//
+		scanner.close();
 	}
 	
 	public void queryOrder() {
@@ -63,6 +69,16 @@ public class RunnerOrder {
 		System.out.println(od);
 	
 	}
+
+	public void queryListProduct(String productName) { //"Harley Davidson Ultimate Chopper"
+		ProductsDAO productDAO = new ProductsDAO();
+		List<Product> products = productDAO.findByName(productName);
+		System.out.println(products);
+		for (Product product: products) {
+			System.out.println(product);
+			System.out.println(product.getOrdersDetail());
+		}
+	}
 	
 	
 	private void createOrderByCustomerId(int customerId) {
@@ -70,7 +86,8 @@ public class RunnerOrder {
 		Customer customer = cdao.findById(customerId);
 		if (customer != null) {
 			Order order = new Order();
-			order.setCustomerId(customerId);
+			//order.setCustomerId(customerId);
+			order.setCustomer(customer);
 			order.setOrderDate(new Date());
 			order.setRequiredDate(new Date());
 			order.setStatus("In process");

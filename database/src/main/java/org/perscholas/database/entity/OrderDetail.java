@@ -19,15 +19,15 @@ public class OrderDetail {
 	@Column(name = "id")
 	private Integer id;
 
-	@Column(name = "order_id", insertable = false, updatable = false)
-	private Integer orderId;
+//	@Column(name = "order_id", insertable = false, updatable = false)
+//	private Integer orderId;
 
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "order_id", nullable = false)
 	private Order order;
 
-	@Column(name = "product_id", insertable = false, updatable = false)
-	private Integer productId;	
+//	@Column(name = "product_id", insertable = false, updatable = false)
+//	private Integer productId;
 
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "product_id", nullable = false)
@@ -50,21 +50,21 @@ public class OrderDetail {
 		this.id = id;
 	}
 
-	public Integer getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(Integer orderId) {
-		this.orderId = orderId;
-	}
-
-	public Integer getProductId() {
-		return productId;
-	}
-
-	public void setProductId(Integer productId) {
-		this.productId = productId;
-	}
+//	public Integer getOrderId() {
+//		return orderId;
+//	}
+//
+//	public void setOrderId(Integer orderId) {
+//		this.orderId = orderId;
+//	}
+//
+//	public Integer getProductId() {
+//		return productId;
+//	}
+//
+//	public void setProductId(Integer productId) {
+//		this.productId = productId;
+//	}
 
 	public Integer getQuantityOrdered() {
 		return quantityOrdered;
@@ -100,7 +100,7 @@ public class OrderDetail {
 
 	@Override
 	public String toString() {
-		return "\n\nOrderDetails [id=" + id + ", orderId=" + orderId + ", productId=" + productId +  ", quantityOrdered=" + quantityOrdered + ", priceEach=" + priceEach + ", orderLineNumber="
+		return "\n\nOrderDetails [id=" + id +   ", quantityOrdered=" + quantityOrdered + ", priceEach=" + priceEach + ", orderLineNumber="
 				+ orderLineNumber + "]";
 	}
 
