@@ -38,6 +38,7 @@ public class OrderDAO {
 //		query.setParameter("customerObj",  customer);
 		query.setParameter("customerId",  customerId);
 		List<Order> result = query.getResultList();
+		session.close();
 		return result;
 	}
 	

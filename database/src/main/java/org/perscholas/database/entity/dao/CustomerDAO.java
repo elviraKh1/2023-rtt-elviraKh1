@@ -24,6 +24,7 @@ public class CustomerDAO {
 
 		try {
 			Customer result = query.getSingleResult();
+			session.close();
 			return result;
 		} catch (NoResultException nre) {
 			return null;
@@ -38,6 +39,7 @@ public class CustomerDAO {
 		query.setParameter("firstname", fname);
 
 		List<Customer> result = query.getResultList();
+		session.close();
 		return result;
 	}
 	
@@ -48,7 +50,7 @@ public class CustomerDAO {
 //		if (customer.getId())
 		session.saveOrUpdate(customer);
 		t.commit();
-	
+		session.close();
 //		String hql = "From Customer c WHERE c.contactFirstName = :firstname";
 //		TypedQuery<Customer> query = session.createQuery(hql, Customer.class);
 //		query.setParameter("firstname", fname);

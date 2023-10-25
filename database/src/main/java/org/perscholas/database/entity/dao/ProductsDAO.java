@@ -22,6 +22,7 @@ public class ProductsDAO {
 		query.setParameter("id",  id);
 		try {
 			Product result = query.getSingleResult();
+			session.close();
 			return result;
 		} catch (NoResultException nre) {
 			return null;
@@ -37,6 +38,7 @@ public class ProductsDAO {
 		query.setParameter("productName",  "%"+productName+"%");
 
 		List<Product> result = query.getResultList();
+		session.close();
 		return result;
 	}
 }

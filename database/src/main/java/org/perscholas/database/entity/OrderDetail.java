@@ -37,7 +37,7 @@ public class OrderDetail {
 	private Integer quantityOrdered;	
 
 	@Column(name = "price_each", columnDefinition = "decimal(10,2)")
-	private String priceEach;		 
+	private Double priceEach;
 
 	@Column(name = "order_line_number"  )
 	private Short orderLineNumber;
@@ -74,11 +74,11 @@ public class OrderDetail {
 		this.quantityOrdered = quantityOrdered;
 	}
 
-	public String getPriceEach() {
+	public Double getPriceEach() {
 		return priceEach;
 	}
 
-	public void setPriceEach(String priceEach) {
+	public void setPriceEach(Double priceEach) {
 		this.priceEach = priceEach;
 	}
 
