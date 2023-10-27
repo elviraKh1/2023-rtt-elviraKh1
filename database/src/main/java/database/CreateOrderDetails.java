@@ -40,6 +40,10 @@ public class CreateOrderDetails {
         Integer productId = scanner.nextInt();
 
         Product product = productsDAO.findById(productId);
+        if (product == null) {
+            System.out.println("The product with id "+ productId+ " does not exist" );
+            System.exit(0);
+        }
 
         System.out.print("\nEnter a order id:");
         Integer enterOrderId = scanner.nextInt();
@@ -49,23 +53,34 @@ public class CreateOrderDetails {
             System.out.println("The order with id "+ enterOrderId+ " does not exist" );
             System.exit(0);
         }
+        OrderDetail orderDetail = orderDetailDAO.findByOrderIdAndProductId(enterOrderId, productId);
+        //for (OrderDetail orderDetail : order.getOrdersDetail()) {
+//            if (orderDetail.getProduct().getId().equals(productId)) {
+//                System.out.println("The product "+ product.getProductName()+ " is already part of the order with id "+ order.getId() +". Can not add again");
+//                System.exit(0);
+//            }
+        //}
 
-        for (OrderDetail orderDetail : order.getOrdersDetail()) {
-            if (orderDetail.getProduct().getId()==productId) {
+
+        if (orderDetail == null ) {
+            orderDetail = new OrderDetail();
+            orderDetail.setProduct(product);
+            orderDetail.setOrder(order);
+            orderDetail.setOrderLineNumber((short)3);
+            orderDetail.setQuantityOrdered(12);
+            orderDetail.setPriceEach(25.55);
+//        orderDetailDAO.save(orderDetail);  /// the same as  order.getOrdersDetail().add(orderDetail); orderDAO.save(order);
+            order.getOrdersDetail().add(orderDetail);
+            orderDAO.save(order);
+            System.out.println("Successfully added product "+ product.getProductName() +" to order with id "+ order.getId());
+        }else {
+            if (orderDetail.getProduct().getId().equals(productId)) {
                 System.out.println("The product "+ product.getProductName()+ " is already part of the order with id "+ order.getId() +". Can not add again");
                 System.exit(0);
             }
         }
 
-        OrderDetail orderDetail = new OrderDetail();
-        orderDetail.setProduct(product);
-        orderDetail.setOrder(order);
-        orderDetail.setOrderLineNumber((short)3);
-        orderDetail.setQuantityOrdered(12);
-        orderDetail.setPriceEach(25.55);
-//        orderDetailDAO.save(orderDetail);  /// the same as  order.getOrdersDetail().add(orderDetail); orderDAO.save(order);
-        order.getOrdersDetail().add(orderDetail);
-        orderDAO.save(order);
-        System.out.println("Successfully added product "+ product.getProductName() +" to order with id "+ order.getId());
     }
+
+
 }
