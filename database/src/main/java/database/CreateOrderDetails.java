@@ -29,30 +29,30 @@ public class CreateOrderDetails {
         List<Product> products = productsDAO.findByName(productName);
 
         if (products.size() == 0){
-            System.out.println("You didnt enter a valid product name");
+            System.out.println("You didn't enter a valid product name");
             System.exit(0);
         }
 
         for (Product product: products) {
             System.out.println("id="+product.getId()+" | "+product.getProductName());
         }
-        System.out.print("\nSelect a product id:");//10100
+        System.out.print("\nSelect a product id:");//1
         Integer productId = scanner.nextInt();
 
         Product product = productsDAO.findById(productId);
 
         System.out.print("\nEnter a order id:");
-        Integer enterProductId = scanner.nextInt();
+        Integer enterOrderId = scanner.nextInt();
 
-        Order order = orderDAO.findById(enterProductId);//10100
+        Order order = orderDAO.findById(enterOrderId);//10100
         if (order == null) {
-            System.out.println("The order with id "+ enterProductId+ " does not exist" );
+            System.out.println("The order with id "+ enterOrderId+ " does not exist" );
             System.exit(0);
         }
 
         for (OrderDetail orderDetail : order.getOrdersDetail()) {
             if (orderDetail.getProduct().getId()==productId) {
-                System.out.println("The product "+ product.getProductName()+ " is already part of the order. can not add again");
+                System.out.println("The product "+ product.getProductName()+ " is already part of the order with id "+ order.getId() +". Can not add again");
                 System.exit(0);
             }
         }
@@ -66,6 +66,6 @@ public class CreateOrderDetails {
 //        orderDetailDAO.save(orderDetail);  /// the same as  order.getOrdersDetail().add(orderDetail); orderDAO.save(order);
         order.getOrdersDetail().add(orderDetail);
         orderDAO.save(order);
-        System.out.println("Succesfully added product "+ product.getProductName() +" to order with id "+ order.getId());
+        System.out.println("Successfully added product "+ product.getProductName() +" to order with id "+ order.getId());
     }
 }
