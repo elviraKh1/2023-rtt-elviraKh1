@@ -75,8 +75,14 @@ public class CreateOrderDetails {
             System.out.println("Successfully added product "+ product.getProductName() +" to order with id "+ order.getId());
         }else {
             if (orderDetail.getProduct().getId().equals(productId)) {
-                System.out.println("The product "+ product.getProductName()+ " is already part of the order with id "+ order.getId() +". Can not add again");
-                System.exit(0);
+                System.out.println("The product "+ product.getProductName()+ " is already part of the order with id "+ order.getId() +". Quantity is "+ orderDetail.getQuantityOrdered());
+                System.out.print("How many additional would  you like add to order?");
+                int quantity = scanner.nextInt();
+                orderDetail.setQuantityOrdered(orderDetail.getQuantityOrdered()+quantity);
+                orderDetailDAO.save(orderDetail);
+                // System.exit(0);
+                System.out.println("The product "+ product.getProductName()+ " is added to the order with id "+ order.getId() +". Quantity is "+ orderDetail.getQuantityOrdered());
+
             }
         }
 
