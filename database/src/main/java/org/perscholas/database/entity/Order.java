@@ -3,6 +3,7 @@ package org.perscholas.database.entity;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "orders")
@@ -121,6 +122,23 @@ public class Order {
 //				+ ", comments=" + comments + "]\n\n";
 //	}
 
-	
+	@Override
+	public int hashCode() {
+		return Objects.hash(comments, id, orderDate, requiredDate, shippedDate, status);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Order other = (Order) obj;
+		return Objects.equals(comments, other.comments) && Objects.equals(id, other.id)
+				&& Objects.equals(orderDate, other.orderDate) && Objects.equals(requiredDate, other.requiredDate)
+				&& Objects.equals(shippedDate, other.shippedDate) && Objects.equals(status, other.status);
+	}
 	
 }

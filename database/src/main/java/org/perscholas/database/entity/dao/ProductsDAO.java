@@ -33,8 +33,8 @@ public class ProductsDAO {
 		SessionFactory factory = new Configuration().configure().buildSessionFactory();
 		Session session = factory.openSession();
 //		String hql = "From Customer c WHERE c.id = ?1";
-		String hql = "From Product p WHERE p.productName like :productName ";
-		TypedQuery<Product> query = session.createQuery(hql, Product.class);
+		String hql = "Select p From Product p WHERE p.productName like :productName ";
+		TypedQuery<Product> query = session.createQuery(hql);//, Product.class);
 		query.setParameter("productName",  "%"+productName+"%");
 
 		List<Product> result = query.getResultList();

@@ -7,6 +7,7 @@ import javax.persistence.TypedQuery;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.perscholas.database.entity.Customer;
 import org.perscholas.database.entity.Order;
@@ -39,6 +40,22 @@ public class OrderDAO {
 //		query.setParameter("customerObj",  customer);
 		query.setParameter("customerId",  customerId);
 		List<Order> result = query.getResultList();
+		session.close();
+		return result;
+	}
+
+	public Customer findByCustomerId2( Integer id ) {
+		SessionFactory factory = new Configuration().configure().buildSessionFactory();
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+
+		String hql = "FROM Customer c where c.id = :custId";
+		TypedQuery<Customer> query = session.createQuery(hql, Customer.class);
+		query.setParameter("custId", id);
+		Customer result = query.getSingleResult();
+
+		t.commit();
+		factory.close();
 		session.close();
 		return result;
 	}
