@@ -1,0 +1,36 @@
+body {
+    background-color: rgba(255, 155, 25, 255);
+    color: white;
+}
+article{
+    height: 200px;
+
+}
+
+.left {
+    float: left;
+    width: 50%;
+    height: 200px;
+
+
+}
+
+.right {
+    float: right;
+    width: 50%;
+   
+}
+
+.image {
+    width: 150px;
+    height: 150px;
+}
+
+nav li {
+    display: inline-block; 
+    font-size: 20px;
+}
+
+a{
+    color: white;
+}
