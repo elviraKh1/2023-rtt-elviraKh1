@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap" rel="stylesheet" />
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            font-family: 'Bungee Spice';
+        }
+
+        .contain1 {
+            height: 200px;
+            width: 200px;
+            border: 10px dashed plum;
+            position: absolute;
+            top: 50px;
+            left: 100px;
+            background-size: contain;
+            background-image: url("https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41477-019-0374-3/MediaObjects/41477_2019_374_Figa_HTML.jpg?as=webp");
+            background-color: wheat;
+            background-blend-mode: difference
+                /* backdrop-filter blur(100px); */
+
+        }
+
+        .cover1 {
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            top: 50px;
+            right: 100px;
+            background-size: cover;
+            background-image: url("https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41477-019-0374-3/MediaObjects/41477_2019_374_Figa_HTML.jpg?as=webp");
+            text-align: center;
+            color: aliceblue;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Font</h1>
+    <div class="contain1">
+        <h2>image background-size contain</h2>
+    </div>
+
+    <div class="cover1">
+        <h2>image background-size cover</h2>
+    </div>
+
+
+</body>
+
+</html>

@@ -6,50 +6,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <style>
+        h2 {
+            text-align: center;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 500;
+            color: #394a51;
+            background-color: #fbf2d5;
+        }
+
+        ::placeholder {
+            color: #7fa99b;
+        }
+
+        .main {
+            position: relative;
+            top: 15px;
+            left: 40lvw;
+        }
+
+        .txt {
+            margin-bottom: 10px;
+            height: 20px;
+            width: 95%;
+            border: 1px solid #7fa99b;
+            border-radius: 5px;
+        }
+        .txt:: {
+            border: 1px solid #7fa99b;
+            border-radius: 5px;
+        }
+
+        .check {
+            margin-right: 5px;
+            margin-bottom: 10px;
+        }
+
         form {
             /* height: 200px; */
-            width: 450px;
-            border: 1px solid black;
+            width: 250px;
+            border: 1px solid #7fa99b;
+            border-radius: 10px;
             padding: 10px;
             margin: 10px;
+            background-color: #fdc57b;
+        }
+
+        button {
+            background-color: #fbf2d5;
+            color: #394a51;
+            margin-top: auto;
+            height: 30px;
+            width: 85px;
+            border-radius: 5px;
         }
     </style>
 </head>
 
 <body>
     <h2>Register Page</h2>
-    <form action="login.html">
-        <label for="FName">First Name</label>
-        <input type="text" name="FName" id="FName" required placeholder="Enter Your First Name"><br>
-        <label for="LName">Last Name</label>
-        <input type="text" name="LName" id="LName" required placeholder="Enter Your Last Name"><br>
-        <label for="email">Email</label>
-        <input type="text" name="email" id="email" required placeholder="Enter Your Email"><br>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" required placeholder="Enter Your Password"><br>
+    <div class="main">
+        <form action="login.html">
+            <label for="FName">First Name</label><br>
+            <input class="txt" type="text" name="FName" id="FName" placeholder="Enter Your First Name"><br>
+            <label for="LName">Last Name</label><br>
+            <input class="txt" type="text" name="LName" id="LName" placeholder="Enter Your Last Name"><br>
+            <label for="email">Email</label><br>
+            <input class="txt" type="text" name="email" id="email" placeholder="Enter Your Email"><br>
+            <label for="password">Password</label><br>
+            <input class="txt" type="password" name="password" id="password" placeholder="Enter Your Password"><br>
 
-        <label for="password2">Confirm Password</label>
-        <input type="password" name="password2" id="password2" placeholder="Confirm Your Password"><br>
-        <label for="radio_gender">Gender
+            <label for="password2">Confirm Password</label><br>
+            <input class="txt" type="password" name="password2" id="password2" placeholder="Confirm Your Password"><br>
+            <label for="radio_gender">Gender<br>
 
-            <input type="radio" name="radio_gender" id="female">
-            <label for="female">Female</label>
+                <input class="check" type="radio" name="radio_gender" id="female">
+                <label for="female">Female</label>
 
-            <input  type="radio" name="radio_gender" id="male">
-            <label for="male">Male</label>
-        </label><br>
+                <input class="check" type="radio" name="radio_gender" id="male">
+                <label for="male">Male</label>
+            </label><br>
 
-        <label for="dob">Date of Birth</label>
-        <input type="date" name="dob" id="dob" required placeholder="mm/dd/yyyy"><br>
+            <label for="dob">Date of Birth</label><br>
+            <input class="txt" type="date" name="dob" id="dob" placeholder="mm/dd/yyyy"><br>
 
-        <label for="Habits">Habits
-            <input type="checkbox" name="sport" id="sport"><label for="sport">You like sports</label>
-            <input type="checkbox" name="eat" id="eat"><label for="eat">You like to eat</label>
-            <input type="checkbox" name="sleep" id="sleep"><label for="sleep">You like to sleep</label>
-        </label>
+            <label for="Habits">Habits<br>
+                <input class="check" type="checkbox" name="sport" id="sport"><label for="sport">You like
+                    sports</label><br>
+                <input class="check" type="checkbox" name="eat" id="eat"><label for="eat">You like to eat</label><br>
+                <input class="check" type="checkbox" name="sleep" id="sleep"><label for="sleep">You like to
+                    sleep</label><br>
+            </label>
             <br><button type="submit">Register</button>
-    </form>
-
+        </form>
+    </div>
 </body>
 
 </html>
