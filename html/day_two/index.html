@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Descendant Example */
+        section#DescendantExample p {
+            color: rgb(221, 34, 34);
+        }
+
+        h1 {
+            color: blanchedalmond
+        }
+
+        /* Child Combinator (>)  */
+        #ChildCombinator section>p {
+            color: green;
+        }
+
+        /* Combinators: Adjacent Sibling Example  */
+        h3+p {
+            color: yellow;
+        }
+
+        #idClass .blue_box {
+            height: 50px;
+            width: 50px;
+            background-color: blue;
+            border: 1px solid white;
+            margin: 10px;
+        }
+
+        #idClass #red_box {
+            height: 50px;
+            width: 50px;
+            background-color: red;
+            border: 1px solid white;
+            margin: 10px;
+        }
+
+        /* Example: Anchor Pseudo-Classes  */
+
+        /* unvisited link */
+        #PseudoClasses a:link {
+            color: red;
+        }
+
+        /* visited link */
+        #PseudoClasses a:visited {
+            color: blue;
+        }
+
+        /* mouse over link */
+        #PseudoClasses a:hover {
+            color: yellow;
+        }
+
+        /* selected link */
+        #PseudoClasses a:active {
+            color: aqua;
+        }
+
+        /* Pseudo-Classes: :first-child Example */
+        #firstChildExample p:first-child {
+            background: lightgreen;
+        }
+
+        /* Pseudo-Classes: :last-child Example */
+        #lastChildExample p:last-child {
+            background: pink;
+        }
+
+
+        /* Pseudo-Classes: :nth-child() Example */
+
+        #NthChildExample li:nth-child(1) {
+            color: blue;
+        }
+
+        #NthChildExample li:nth-child(2) {
+            color: green;
+        }
+
+        #NthChildExample li:nth-child(3) {
+            color: orange;
+        }
+
+        table {
+            border: 1px solid black;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <section id="idClass">
+        <h2>Simple Selectors: CSS “class” and “id”</h2>
+        <div class="blue_box"></div>
+        <div class="blue_box"></div>
+        <div class="blue_box"></div>
+        <div id="red_box"></div>
+    </section>
+
+    <section id="DescendantExample">
+        <h2>Descendant Example </h2>
+        <div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+        <p>Doloribus explicabo incidunt magnam magni nobis.</p>
+    </section>
+
+
+    <section>
+        <h2>Combinators: Descendant Example </h2>
+        <div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+        <p>Doloribus explicabo incidunt magnam magni nobis.</p>
+    </section>
+
+
+    <section id="ChildCombinator">
+        <h2>Child Combinator (>)</h2>
+        <div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+        <p>Doloribus explicabo incidunt magnam magni nobis.</p>
+    </section>
+
+    <section>
+        <h3>Combinators: Adjacent Sibling Example </h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        <div>Separator div does affect adjacent siblings.</div>
+        <p>Doloribus explicabo incidunt magnam magni nobis.</p>
+    </section>
+
+    <section id="PseudoClasses">
+        <h2>Example: Anchor Pseudo-Classes</h2>
+
+        <p>Styling a link depending on state
+            <b>
+
+                <a href="http://perscholas.com" target="_blank">This is a link</a>
+            </b>
+        </p>
+        <p><b>Note:</b> a:hover MUST come after a:link and a:visited in the CSS definition in order to be effective.</p>
+        <p><b>Note:</b> a:active MUST come after a:hover in the CSS definition in order to be effective.</p>
+    </section>
+
+    <section id="firstChildExample">
+        <h2>Pseudo-Classes: :first-child Example</h2>
+        <p>Not first child p element.</p>
+        <div>
+            <p>First child p element.</p>
+        </div>
+        <p>Doloribus explicabo incidunt magnam magni nobis.</p>
+    </section>
+
+    <section id="lastChildExample">
+        <h2>Pseudo-Classes: :last-child Example</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        <div>
+            <p>Last child p element.</p>
+        </div>
+        <p>Also last child p element.</p>
+    </section>
+
+    <section id="NthChildExample">
+        <h2> Pseudo-Classes: :nth-child() Example</h2>
+        <ol>
+            <li>List Item 1</li>
+            <li>List Item 2</li>
+            <li>List Item 3</li>
+        </ol>
+    </section>
+
+    <section id="table">
+        <table>
+            <caption>Practice Table</caption>
+            <thead>
+                <tr>
+                    <th>mon</th>
+                    <th>tue</th>
+                    <th>wen</th>
+                    <th>thurs</th>
+                    <th>fri</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>9-5</td>
+                    <td>9-5</td>
+                    <td>9-5</td>
+                    <td>9-5</td>
+                    <td>9-5</td>
+                </tr>
+            </tbody>
+
+        </table>
+
+    </section>
+</body>
+
+</html>

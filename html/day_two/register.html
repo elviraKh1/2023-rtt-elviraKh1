@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        form {
+            /* height: 200px; */
+            width: 450px;
+            border: 1px solid black;
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Register Page</h2>
+    <form action="login.html">
+        <label for="FName">First Name</label>
+        <input type="text" name="FName" id="FName" required placeholder="Enter Your First Name"><br>
+        <label for="LName">Last Name</label>
+        <input type="text" name="LName" id="LName" required placeholder="Enter Your Last Name"><br>
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" required placeholder="Enter Your Email"><br>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required placeholder="Enter Your Password"><br>
+
+        <label for="password2">Confirm Password</label>
+        <input type="password" name="password2" id="password2" placeholder="Confirm Your Password"><br>
+        <label for="radio_gender">Gender
+
+            <input type="radio" name="radio_gender" id="female">
+            <label for="female">Female</label>
+
+            <input  type="radio" name="radio_gender" id="male">
+            <label for="male">Male</label>
+        </label><br>
+
+        <label for="dob">Date of Birth</label>
+        <input type="date" name="dob" id="dob" required placeholder="mm/dd/yyyy"><br>
+
+        <label for="Habits">Habits
+            <input type="checkbox" name="sport" id="sport"><label for="sport">You like sports</label>
+            <input type="checkbox" name="eat" id="eat"><label for="eat">You like to eat</label>
+            <input type="checkbox" name="sleep" id="sleep"><label for="sleep">You like to sleep</label>
+        </label>
+            <br><button type="submit">Register</button>
+    </form>
+
+</body>
+
+</html>
