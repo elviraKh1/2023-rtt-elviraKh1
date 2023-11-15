@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cross</title>
+</head>
+
+<body>
+    <div id="box">
+
+    </div>
+    <script type="text/javascript">
+        let inputSize = prompt("Enter size");
+        let element = document.getElementById("box");
+        for (let y = 0; y < inputSize; y++) {
+            let line = '';
+            for (let x = 0; x <= y; x++) {
+                    line += '*';
+            }
+            element.innerHTML += line.replaceAll(' ', '&nbsp;') + '<br>'
+            console.log(line);
+        } 
+    </script>
+
+
+</body>
+
+</html>

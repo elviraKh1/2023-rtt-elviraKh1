@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cross</title>
+</head>
+
+<body>
+    <div id="box">
+
+    </div>
+    <script type="text/javascript">
+        let inputHeigth = prompt("Enter heigth");
+        let inputWidth = prompt("Enter width");
+        let element = document.getElementById("box");
+        for (let y = 0, w = 0; y <= inputHeigth; y++, w += 2) {
+            let line = '';
+            for (let x = y; x > 0; x--) {
+                line += ' ';
+            }
+            for (let x = inputWidth - w; x > 0; x--) {
+                line += '*'
+            }
+            console.log(line);
+            element.innerHTML += line.replaceAll(' ', '&nbsp;') + '<br>'
+            
+        } 
+    </script>
+
+
+</body>
+
+</html>

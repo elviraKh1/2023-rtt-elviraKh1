@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>checkerboard</title>
+</head>
+
+<body>
+    <div id="box">
+
+    </div>
+    <script type="text/javascript">
+        let inputWidth = prompt("Enter width");
+        let inputHeigth = prompt("Enter heigth");
+        let element = document.getElementById("box");
+        for (let y = 1; y <= inputHeigth; y++) {
+            let even = y % 2 == 0;
+            let line = '';
+            for (let x = 1; x <= inputWidth; x++) {
+                if (even) {
+                    line += '*'
+                    even = false;
+                } else {
+                    line += ' '
+                    even = true;
+                }
+            }
+            console.log(line + '\n'); 
+            element.innerHTML += line.replaceAll(' ', '&nbsp;') + '<br>'
+        } 
+    </script>
+</body>
+
+</html>

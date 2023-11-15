@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box</title>
+</head>
+
+<body>
+    <div id="box">
+
+    </div>
+    <script type="text/javascript">
+        let inputWidth = prompt("Enter width");
+        let inputHeigth = prompt("Enter heigth");
+        let element = document.getElementById("box");
+        for (let y = 1; y <= Number(inputHeigth); y++) {
+            let line = '';
+            for (let x = 1; x <= Number(inputWidth); x++) {
+                line += '*'
+            }
+            element.innerHTML += line + '<br>';
+            console.log(line + '\n');
+        } 
+    </script>
+
+
+</body>
+
+</html>
