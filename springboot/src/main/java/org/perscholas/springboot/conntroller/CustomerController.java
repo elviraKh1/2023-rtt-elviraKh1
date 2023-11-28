@@ -7,7 +7,18 @@ import org.perscholas.springboot.formbean.CreateCustomerFormBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
+
+
+// add a label to the existing form input for first name
+// add a 2nd form input for last name
+// change the controller to accept the new form input for last name as well as first name
+// change the query to search by first name OR last name
+// change the query to use like for both first name and last name
+// make both search fields populate the user input if it was given
 
 @Slf4j
 @Controller
@@ -41,6 +52,38 @@ public class CustomerController {
 
     @Autowired
     private CustomerDAO customerDAO;
+
+    @GetMapping("/customer/searchbyname")
+    public ModelAndView searchCustomer(@RequestParam(required = false) String fName,
+                                       @RequestParam(required = false) String lName) {
+        ModelAndView response = new ModelAndView("/customer/search");
+        log.info("In the customer search controller method search parameters fName: "+fName+" and lName: "+lName);
+        if (fName!=null||lName!=null) {
+            List<Customer> customers = customerDAO.findByFullName(fName, lName);
+            response.addObject("customersVar",customers);
+            response.addObject("fName",fName);
+            response.addObject("lName",lName);
+            for (Customer customer: customers) {
+                log.debug("Customer is "+customer);
+            }
+        }
+        return response;
+    }
+
+    @GetMapping("/customer/search")
+    public ModelAndView searchCustomer(@RequestParam(required = false) String search) {
+        ModelAndView response = new ModelAndView("/customer/search");
+        log.info("In the customer search controller method search parameter: "+search);
+        if (search!=null) {
+            List<Customer> customers = customerDAO.findByFirstName(search);
+            response.addObject("customersVar",customers);
+            response.addObject("search",search);
+            for (Customer customer: customers) {
+                log.debug("Customer is "+customer);
+            }
+        }
+        return response;
+    }
 
     @GetMapping("/customer/create")
     public ModelAndView createCustomer() {
