@@ -1,5 +1,6 @@
 package org.perscholas.springboot.conntroller;
 
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.perscholas.springboot.database.dao.EmployeeDAO;
 import org.perscholas.springboot.database.entity.Employee;
@@ -8,6 +9,8 @@ import org.perscholas.springboot.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,20 +42,24 @@ public class EmployeeController {
 
     //    //////arguments spring beans
     @GetMapping("/employee/createSubmit")
-    public ModelAndView createEmployeeSubmit(CreateEmployeeFormBean form) {
-        ModelAndView response = new ModelAndView("/employee/create");
-        System.out.println("firstName=" + form.getFirstName());
-        System.out.println("lastName=" + form.getLastName());
-        System.out.println("departmentName=" + form.getDepartmentName());
+    public ModelAndView createEmployeeSubmit(@Valid CreateEmployeeFormBean form, BindingResult bindingResult) {
+        log.info("######################### In create employee submit #########################");
+        ModelAndView response ;
 
-        log.info("In create employee with args " + form);
+        if (bindingResult.hasErrors()) {
+            log.info("######################### In create employee submit -HAS ERRORS #########################");
+            response = new ModelAndView("employee/create");
+            for (ObjectError error : bindingResult.getAllErrors()) {
+                log.info("error " + error.getDefaultMessage());
+            }
+            response.addObject("form", form);
+            response.addObject("errors", bindingResult);
+            return response;
+        }
 
-        employeeService.createEmployee(form);
-//        Employee employee = new Employee();
-//        employee.setFirstName(form.getFirstName());
-//        employee.setLastName(form.getLastName());
-//        employee.setDepartmentName(form.getDepartmentName());
-//        employeeDAO.save(employee);
+        Employee e = employeeService.createEmployee(form);
+        response = new ModelAndView();
+        response.setViewName("redirect:/employee/edit/" + e.getId() + "?success=Employee Saved Successfully");
 
         return response;
     }
@@ -82,11 +89,16 @@ public class EmployeeController {
     }
 
     @GetMapping("/employee/edit/{id}")
-    public ModelAndView editEmployee(@PathVariable Integer id) {
+    public ModelAndView editEmployee(@PathVariable Integer id, @RequestParam(required = false) String success) {
         ModelAndView response = new ModelAndView("/employee/create");
 
         log.info("In edit employee with id = " + id);
         Employee employee = employeeDAO.findById(id);
+
+        if (!StringUtils.isEmpty(success)) {
+            response.addObject("success", success);
+        }
+
 
         CreateEmployeeFormBean form = new CreateEmployeeFormBean();
         if (employee != null) {
