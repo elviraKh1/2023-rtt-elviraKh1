@@ -107,31 +107,35 @@ public class CustomerController {
     //    //////arguments spring beans
     @GetMapping("/customer/createSubmit")
     public ModelAndView createCustomerSubmit(CreateCustomerFormBean form) {
-        ModelAndView response = new ModelAndView("/customer/create");
-        System.out.println("firstName=" + form.getFirstName());
-        System.out.println("lastName=" + form.getLastName());
-        System.out.println("phone=" + form.getPhone());
-        System.out.println("city=" + form.getCity());
+        log.info("######################### In create customer submit #########################");
+//        ModelAndView response = new ModelAndView("/customer/create");
 
         log.info("In create customer with args");
 
-        customerService.createCustomer(form);
+        Customer c = customerService.createCustomer(form);
 //        Customer customer = new Customer();
 //        customer.setFirstName(form.getFirstName());
 //        customer.setLastName(form.getLastName());
 //        customer.setPhone(form.getPhone());
 //        customer.setCity(form.getCity());
 //        customerDAO.save(customer);
-
+        ModelAndView response = new ModelAndView();
+        response.setViewName("redirect:/customer/edit/" + c.getId() + "?success=Customer Saved Successfully");
         return response;
     }
 
     @GetMapping("/customer/edit/{id}")
-    public ModelAndView editCustomer(@PathVariable int id) {
+    public ModelAndView editCustomer(@PathVariable int id, @RequestParam(required = false) String success) {
+        log.info("######################### In /customer/edit #########################");
         ModelAndView response = new ModelAndView("/customer/create");
         log.info("In edit  customer with id " + id);
 
         Customer customer = customerDAO.findById(id);
+
+        if (!StringUtils.isEmpty(success)) {
+            response.addObject("success", success);
+        }
+
         CreateCustomerFormBean form = new CreateCustomerFormBean();
         if (customer != null) {
 
