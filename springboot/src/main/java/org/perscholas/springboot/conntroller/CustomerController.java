@@ -1,5 +1,6 @@
 package org.perscholas.springboot.conntroller;
 
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.perscholas.springboot.database.dao.CustomerDAO;
 import org.perscholas.springboot.database.entity.Customer;
@@ -8,11 +9,14 @@ import org.perscholas.springboot.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.naming.Binding;
 import java.util.List;
 
 
@@ -62,21 +66,21 @@ public class CustomerController {
     public ModelAndView searchCustomer(@RequestParam(required = false) String fName,
                                        @RequestParam(required = false) String lName) {
         ModelAndView response = new ModelAndView("/customer/search");
-        log.info("In the customer search controller method search parameters fName: "+fName+" and lName: "+lName);
-        if (StringUtils.isEmpty(fName)||StringUtils.isEmpty(lName)) {
-            response.addObject("fName",fName);
-            response.addObject("lName",lName);
+        log.info("In the customer search controller method search parameters fName: " + fName + " and lName: " + lName);
+        if (StringUtils.isEmpty(fName) || StringUtils.isEmpty(lName)) {
+            response.addObject("fName", fName);
+            response.addObject("lName", lName);
 
-            if (!StringUtils.isEmpty(fName)){
-                fName="%"+fName+"%";
+            if (!StringUtils.isEmpty(fName)) {
+                fName = "%" + fName + "%";
             }
-            if (!StringUtils.isEmpty(lName)){
-                lName="%"+lName+"%";
+            if (!StringUtils.isEmpty(lName)) {
+                lName = "%" + lName + "%";
             }
             List<Customer> customers = customerDAO.findByFullName(fName, lName);
-            response.addObject("customersVar",customers);
-            for (Customer customer: customers) {
-                log.debug("Customer is "+customer);
+            response.addObject("customersVar", customers);
+            for (Customer customer : customers) {
+                log.debug("Customer is " + customer);
             }
         }
         return response;
@@ -85,13 +89,13 @@ public class CustomerController {
     @GetMapping("/customer/search")
     public ModelAndView searchCustomer(@RequestParam(required = false) String search) {
         ModelAndView response = new ModelAndView("/customer/search");
-        log.info("In the customer search controller method search parameter: "+search);
-        if (search!=null) {
+        log.info("In the customer search controller method search parameter: " + search);
+        if (search != null) {
             List<Customer> customers = customerDAO.findByFirstName(search);
-            response.addObject("customersVar",customers);
-            response.addObject("search",search);
-            for (Customer customer: customers) {
-                log.debug("Customer is "+customer);
+            response.addObject("customersVar", customers);
+            response.addObject("search", search);
+            for (Customer customer : customers) {
+                log.debug("Customer is " + customer);
             }
         }
         return response;
@@ -106,21 +110,26 @@ public class CustomerController {
 
     //    //////arguments spring beans
     @GetMapping("/customer/createSubmit")
-    public ModelAndView createCustomerSubmit(CreateCustomerFormBean form) {
+    public ModelAndView createCustomerSubmit(@Valid CreateCustomerFormBean form, BindingResult bindingResult) {
         log.info("######################### In create customer submit #########################");
 //        ModelAndView response = new ModelAndView("/customer/create");
 
-        log.info("In create customer with args");
+        if (bindingResult.hasErrors()) {
+            log.info("######################### In create customer submit -HAS ERRORS #########################");
+            ModelAndView response = new ModelAndView("customer/create");
+            for (ObjectError error : bindingResult.getAllErrors()) {
+                log.info("error " + error.getDefaultMessage());
+            }
+            response.addObject("form", form);
+            response.addObject("errors", bindingResult);
+
+            return response;
+        }
 
         Customer c = customerService.createCustomer(form);
-//        Customer customer = new Customer();
-//        customer.setFirstName(form.getFirstName());
-//        customer.setLastName(form.getLastName());
-//        customer.setPhone(form.getPhone());
-//        customer.setCity(form.getCity());
-//        customerDAO.save(customer);
         ModelAndView response = new ModelAndView();
         response.setViewName("redirect:/customer/edit/" + c.getId() + "?success=Customer Saved Successfully");
+
         return response;
     }
 
@@ -144,10 +153,10 @@ public class CustomerController {
             form.setCity(customer.getCity());
             form.setPhone(customer.getPhone());
             form.setId(customer.getId());
-        }else {
-            log.warn(" customer with id " + id+" NOT found");
+        } else {
+            log.warn(" customer with id " + id + " NOT found");
         }
-        response.addObject("form",form);
+        response.addObject("form", form);
 
         return response;
     }
