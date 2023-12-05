@@ -8,18 +8,8 @@
 
 <section>
     <div class="container pt-5">
-    <h1  class="pb-3">Customer search by name</h1>
-
-        <form method="GET" action="/customer/search">
-            <div class="mb-3">
-                <label for="search" class="form-label">Search</label>
-                <input type="text" class="form-control" id="search"  name="search"  placeholder="Search by name" value="${search}">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-
-    <h1 class="mb-3">Customer search by full name</h1>
-            <form method="GET" action="/customer/searchbyname">
+      <h1 class="mb-3">Employee search by full name</h1>
+            <form method="GET" action="/employee/search">
                     <div class="mb-3">
                         <label for="fName" class="form-label">First name</label>
                         <input type="text" class="form-control" id="fName"  name="fName"  placeholder="Search by first name" value="${fName}">
@@ -31,23 +21,23 @@
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
 
-        <c:if test="${not empty customersVar}">
-          <h6 class="pt-3">customers found  ${customersVar.size()} </h6>
+        <c:if test="${not empty employees}">
+          <h6 class="pt-3">employee found  ${employees.size()} </h6>
           <table class='table'>
             <tr>
                 <td>First name</td>
                 <td>Last name</td>
-                <td>Phone</td>
-                <td>City</td
+                <td>Department</td>
                 <td>Edit</td>
+                <td>Delete</td>
             </tr>
-        <c:forEach items="${customersVar}" var="customer">
+        <c:forEach items="${employees}" var="employee">
             <tr>
-                <td>${customer.firstName}</td>
-                <td>${customer.lastName}</td>
-                <td>${customer.phone}</td>
-                <td>${customer.city}</td>
-                <td><a href="/customer/edit/${customer.id}">Edit</a></td>
+                <td>${employee.firstName}</td>
+                <td>${employee.lastName}</td>
+                <td>${employee.departmentName}</td>
+                <td><a href="/employee/edit/${employee.id}">Edit</a></td>
+                <td><a href="/employee/delete/${employee.id}">Delete</a></td>
             </tr>
         </c:forEach>
           </table>

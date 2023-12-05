@@ -7,19 +7,20 @@
 <section>
     <div class="container">
         <form method="GET" action="/employee/createSubmit">
+          <input type="hidden" name="id" value="${form.id}">
             <div class="mb-3">
                 <label for="firstName" class="form-label">First name</label>
-                <input type="text" class="form-control" id="firstName"  name="firstName" aria-describedby="firstNameHelp">
+                <input type="text" class="form-control" id="firstName"  name="firstName" aria-describedby="firstNameHelp"  value="${form.firstName}">
                 <div id="firstNameHelp" class="form-text">Please let us  know your first name.</div>
             </div>
             <div class="mb-3">
                 <label for="lastName" class="form-label">Last name</label>
-                <input type="text" class="form-control" id="lastName" name="lastName" aria-describedby="lastNameHelp">
+                <input type="text" class="form-control" id="lastName" name="lastName" aria-describedby="lastNameHelp"  value="${form.lastName}">
                 <div id="lastNameHelp" class="form-text">Please let us  know your last name.</div>
             </div>
             <div class="mb-3">
                 <label for="departmentName" class="form-label">Department name</label>
-                <input type="text" class="form-control" id="departmentName" name="departmentName" aria-describedby="departmentNameHelp">
+                <input type="text" class="form-control" id="departmentName" name="departmentName" aria-describedby="departmentNameHelp"  value="${form.departmentName}">
                 <div id="departmentNameHelp" class="form-text">Department Name.</div>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>

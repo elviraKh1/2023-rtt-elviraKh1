@@ -4,9 +4,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.perscholas.springboot.database.dao.CustomerDAO;
 import org.perscholas.springboot.database.entity.Customer;
 import org.perscholas.springboot.formbean.CreateCustomerFormBean;
+import org.perscholas.springboot.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -49,6 +52,8 @@ public class CustomerController {
 //        return response;
 //    }
 
+    @Autowired
+    private CustomerService customerService;
 
     @Autowired
     private CustomerDAO customerDAO;
@@ -58,11 +63,18 @@ public class CustomerController {
                                        @RequestParam(required = false) String lName) {
         ModelAndView response = new ModelAndView("/customer/search");
         log.info("In the customer search controller method search parameters fName: "+fName+" and lName: "+lName);
-        if (fName!=null||lName!=null) {
-            List<Customer> customers = customerDAO.findByFullName(fName, lName);
-            response.addObject("customersVar",customers);
+        if (StringUtils.isEmpty(fName)||StringUtils.isEmpty(lName)) {
             response.addObject("fName",fName);
             response.addObject("lName",lName);
+
+            if (!StringUtils.isEmpty(fName)){
+                fName="%"+fName+"%";
+            }
+            if (!StringUtils.isEmpty(lName)){
+                lName="%"+lName+"%";
+            }
+            List<Customer> customers = customerDAO.findByFullName(fName, lName);
+            response.addObject("customersVar",customers);
             for (Customer customer: customers) {
                 log.debug("Customer is "+customer);
             }
@@ -103,16 +115,58 @@ public class CustomerController {
 
         log.info("In create customer with args");
 
-        Customer customer = new Customer();
-        customer.setFirstName(form.getFirstName());
-        customer.setLastName(form.getLastName());
-        customer.setPhone(form.getPhone());
-        customer.setCity(form.getCity());
-        customerDAO.save(customer);
+        customerService.createCustomer(form);
+//        Customer customer = new Customer();
+//        customer.setFirstName(form.getFirstName());
+//        customer.setLastName(form.getLastName());
+//        customer.setPhone(form.getPhone());
+//        customer.setCity(form.getCity());
+//        customerDAO.save(customer);
 
         return response;
     }
 
+    @GetMapping("/customer/edit/{id}")
+    public ModelAndView editCustomer(@PathVariable int id) {
+        ModelAndView response = new ModelAndView("/customer/create");
+        log.info("In edit  customer with id " + id);
 
+        Customer customer = customerDAO.findById(id);
+        CreateCustomerFormBean form = new CreateCustomerFormBean();
+        if (customer != null) {
+
+            form.setFirstName(customer.getFirstName());
+            form.setLastName(customer.getLastName());
+            form.setCity(customer.getCity());
+            form.setPhone(customer.getPhone());
+            form.setId(customer.getId());
+        }else {
+            log.warn(" customer with id " + id+" NOT found");
+        }
+        response.addObject("form",form);
+
+        return response;
+    }
+
+//    @GetMapping("/customer/delete/{id}")
+//    public ModelAndView deleteCustomer(@PathVariable int id) {
+//        ModelAndView response = new ModelAndView("/customer/search");
+//        log.info("In delete  customer with id " + id);
+//
+//        Customer customer = customerDAO.deleteById(id);
+//        CreateCustomerFormBean form = new CreateCustomerFormBean();
+//        if (customer != null) {
+//            form.setFirstName(customer.getFirstName());
+//            form.setLastName(customer.getLastName());
+//            form.setCity(customer.getCity());
+//            form.setPhone(customer.getPhone());
+//            form.setId(customer.getId());
+//        }else {
+//            log.warn(" customer with id " + id+" NOT found");
+//        }
+//        response.addObject("form",form);
+//
+//        return response;
+//    }
 }
 

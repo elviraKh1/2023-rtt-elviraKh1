@@ -24,5 +24,15 @@ public class Employee {
 
     @Column(name="departmentname")
     private String departmentName;
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", departmentName='" + departmentName + '\'' +
+                '}';
+    }
 }
 

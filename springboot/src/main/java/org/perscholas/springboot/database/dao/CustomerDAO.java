@@ -10,11 +10,14 @@ import java.util.List;
 @Repository
 public interface CustomerDAO extends JpaRepository<Customer, Long> {
 
-    public Customer findById (int id);
+    public Customer findById (Integer id);
+
+    public Customer deleteById (Integer id);
+
 
     @Query("select c from Customer c where c.firstName=:firstName")
     public List<Customer> findByFirstName (String firstName);
 
-    @Query("select c from Customer c where c.firstName like %:firstName% or c.lastName like %:lastName% ")
+    @Query("select c from Customer c where c.firstName like :firstName or c.lastName like :lastName ")
     public List<Customer> findByFullName (String firstName, String lastName);
 }
