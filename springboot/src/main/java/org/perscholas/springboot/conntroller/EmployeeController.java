@@ -35,7 +35,7 @@ public class EmployeeController {
 
     @GetMapping("/employee/create")
     public ModelAndView createEmployee() {
-        ModelAndView response = new ModelAndView("/employee/create");
+        ModelAndView response = new ModelAndView("employee/create");
         log.info("In create Employee with NO args");
         return response;
     }
@@ -67,7 +67,7 @@ public class EmployeeController {
     @GetMapping("/employee/search")
     public ModelAndView search(@RequestParam(required = false) String fName,
                                @RequestParam(required = false) String lName) {
-        ModelAndView response = new ModelAndView("/employee/search");
+        ModelAndView response = new ModelAndView("employee/search");
         log.info("In the employee search controller method search parameters fName: " + fName + " and lName: " + lName);
         if (StringUtils.isEmpty(fName) || StringUtils.isEmpty(lName)) {
             response.addObject("fName", fName);
@@ -90,7 +90,7 @@ public class EmployeeController {
 
     @GetMapping("/employee/edit/{id}")
     public ModelAndView editEmployee(@PathVariable Integer id, @RequestParam(required = false) String success) {
-        ModelAndView response = new ModelAndView("/employee/create");
+        ModelAndView response = new ModelAndView("employee/create");
 
         log.info("In edit employee with id = " + id);
         Employee employee = employeeDAO.findById(id);
