@@ -20,6 +20,7 @@ public class CustomerService {
         log.debug("last name" + form.getLastName());
         log.debug("city" + form.getCity());
         log.debug("phone" + form.getPhone());
+        log.debug("image url" + form.getImageUrl());
 
         Customer customer = customerDAO.findById(form.getId());
 
@@ -31,6 +32,7 @@ public class CustomerService {
         customer.setLastName(form.getLastName());
         customer.setCity(form.getCity());
         customer.setPhone(form.getPhone());
+        customer.setImageUrl(form.getImageUrl());
 
         return customerDAO.save(customer);
     }

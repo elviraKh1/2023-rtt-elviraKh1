@@ -25,14 +25,17 @@ public class Employee {
     @Column(name="departmentname")
     private String departmentName;
 
+    @Column(name="user_id")
+    private Integer userId;
+
     @Override
     public String toString() {
-        return "Employee{" +
+        return "\nEmployee{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", departmentName='" + departmentName + '\'' +
-                '}';
+                ", userId=" + userId + '}';
     }
 }
 

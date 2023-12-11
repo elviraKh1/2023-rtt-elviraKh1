@@ -59,6 +59,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#"><sec:authentication property="principal.username"/></a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/employee/myEmployees">myEmployees</a>
+                    </li>
+
                 </sec:authorize>
             </ul>
         </div>

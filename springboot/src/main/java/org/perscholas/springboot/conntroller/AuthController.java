@@ -1,10 +1,11 @@
 package org.perscholas.springboot.conntroller;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.perscholas.springboot.database.entity.Customer;
 import org.perscholas.springboot.database.entity.User;
 import org.perscholas.springboot.formbean.RegisterUserFormBean;
+import org.perscholas.springboot.sequirity.AuthenticatedUserService;
 import org.perscholas.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,10 @@ public class AuthController {
 
     @Autowired
     UserService userService;
+
+
+    @Autowired
+    private AuthenticatedUserService authenticatedUserService;
 
     @GetMapping("/auth/register")
     public ModelAndView register() {
@@ -35,7 +40,7 @@ public class AuthController {
     }
 
     @GetMapping("/auth/registerSubmit")
-    public ModelAndView register(@Valid RegisterUserFormBean form, BindingResult bindingResult) {
+    public ModelAndView register(@Valid RegisterUserFormBean form, BindingResult bindingResult, HttpSession session) {
         log.info("######################### In register user #########################");
 
         if (bindingResult.hasErrors()) {
@@ -51,6 +56,8 @@ public class AuthController {
         }
 
         User user = userService.createNewUser(form);
+
+        authenticatedUserService.authenticateNewUser(session, user.getEmail(), form.getPassword());
         ModelAndView response = new ModelAndView();
         response.setViewName("redirect:/");
 

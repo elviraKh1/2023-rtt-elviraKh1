@@ -74,6 +74,21 @@
                     </div>
                 </c:if>
             </div>
+
+            <div class="mt-3">
+                <label for="imageUrl" class="form-label">Image</label>
+                <input type="text" class="form-control" id="imageUrl" name="imageUrl" aria-describedby="imageUrlHelp" value="${form.imageUrl}">
+                <div id="imageUrlHelp" class="form-text">Please upload your image.</div>
+                <c:if test="${errors.hasFieldErrors('imageUrl')}">
+                    <div style="color:red">
+                        <c:forEach items="${errors.getFieldErrors('imageUrl')}" var="error">
+                            ${error.defaultMessage}<br>
+                        </c:forEach>
+                    </div>
+                </c:if>
+            </div>
+
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

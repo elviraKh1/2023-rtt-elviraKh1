@@ -38,7 +38,8 @@
                 <td>First name</td>
                 <td>Last name</td>
                 <td>Phone</td>
-                <td>City</td
+                <td>City</td>
+                <td>Image</td>
                 <td>Edit</td>
             </tr>
         <c:forEach items="${customersVar}" var="customer">
@@ -47,6 +48,7 @@
                 <td>${customer.lastName}</td>
                 <td>${customer.phone}</td>
                 <td>${customer.city}</td>
+                <td><img src="${customer.imageUrl}" style="max-width: 100px"></td>
                 <td><a href="/customer/edit/${customer.id}">Edit</a></td>
             </tr>
         </c:forEach>

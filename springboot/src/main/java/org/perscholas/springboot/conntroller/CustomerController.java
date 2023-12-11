@@ -153,6 +153,7 @@ public class CustomerController {
             form.setCity(customer.getCity());
             form.setPhone(customer.getPhone());
             form.setId(customer.getId());
+            form.setImageUrl(customer.getImageUrl());
         } else {
             log.warn(" customer with id " + id + " NOT found");
         }

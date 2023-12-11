@@ -4,9 +4,12 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.perscholas.springboot.database.dao.EmployeeDAO;
 import org.perscholas.springboot.database.entity.Employee;
+import org.perscholas.springboot.database.entity.User;
 import org.perscholas.springboot.formbean.CreateEmployeeFormBean;
+import org.perscholas.springboot.sequirity.AuthenticatedUserService;
 import org.perscholas.springboot.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
@@ -32,6 +35,9 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private AuthenticatedUserService authenticatedUserService;
 
     @GetMapping("/employee/create")
     public ModelAndView createEmployee() {
@@ -111,6 +117,28 @@ public class EmployeeController {
         }
         response.addObject("form", form);
 
+        return response;
+    }
+
+    @GetMapping("/employee/myEmployees")
+    public ModelAndView myEmployees() {
+        log.info("######################### In my myEmployees #########################");
+
+        // 1) Use the authenticated user service to find the logged in user
+        // 2) Create a DAO method that will find by userId
+        // 3) use the authenticated user id to find a list of all customers created by this user
+        // 4) loop over the customers created and log.debug the customer id and customer last name
+
+        User user =authenticatedUserService.loadCurrentUser();
+        log.debug("user id "+user.getId());
+        List<Employee> employees = employeeDAO.findByUserId(user.getId());
+        log.info("Size employees "+employees.size());
+        for (Employee employee: employees) {
+            log.debug(employee.toString());
+        }
+        log.info("######################### end my myEmployees #########################");
+        ModelAndView response = new ModelAndView("employee/search");
+        response.addObject("employees", employees);
         return response;
     }
 }

@@ -13,4 +13,6 @@ public interface EmployeeDAO extends JpaRepository<Employee, Long> {
 
     public Employee findById (Integer id);
 
+    public List<Employee> findByUserId (Integer userId);
+
 }
