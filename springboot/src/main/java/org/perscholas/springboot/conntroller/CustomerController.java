@@ -4,7 +4,10 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.perscholas.springboot.database.dao.CustomerDAO;
 import org.perscholas.springboot.database.entity.Customer;
+import org.perscholas.springboot.database.entity.Employee;
+import org.perscholas.springboot.database.entity.User;
 import org.perscholas.springboot.formbean.CreateCustomerFormBean;
+import org.perscholas.springboot.sequirity.AuthenticatedUserService;
 import org.perscholas.springboot.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -61,6 +64,9 @@ public class CustomerController {
 
     @Autowired
     private CustomerDAO customerDAO;
+
+    @Autowired
+    private AuthenticatedUserService authenticatedUserService;
 
     @GetMapping("/customer/searchbyname")
     public ModelAndView searchCustomer(@RequestParam(required = false) String fName,
@@ -182,5 +188,55 @@ public class CustomerController {
 //
 //        return response;
 //    }
+
+    @GetMapping("/customer/myCustomers")
+    public ModelAndView myCustomers() {
+        log.info("######################### In my myCustomers #########################");
+
+        // 1) Use the authenticated user service to find the logged in user
+        // 2) Create a DAO method that will find by userId
+        // 3) use the authenticated user id to find a list of all customers created by this user
+        // 4) loop over the customers created and log.debug the customer id and customer last name
+
+        User user =authenticatedUserService.loadCurrentUser();
+        log.debug("user id "+user.getId());
+        List<Customer> customers = customerDAO.findByUserId(user.getId());
+        log.info("Size employees "+customers.size());
+        for (Customer customer: customers) {
+            log.debug(customer.toString());
+        }
+        log.info("######################### end my myCustomers #########################");
+        ModelAndView response = new ModelAndView("customer/search");
+        response.addObject("customers", customers);
+        return response;
+    }
+
+    @GetMapping("/customer/detail/")
+    public ModelAndView viewCustomer(@RequestParam Integer customerId) {
+        log.info("######################### In /customer/detail #########################");
+        ModelAndView response = new ModelAndView("customer/detail");
+        log.info("+++++++++++++++++In edit  customer with id " + customerId);
+        if (customerId==null )
+            return response;
+        Customer customer = customerDAO.findById(customerId);
+
+
+        CreateCustomerFormBean form = new CreateCustomerFormBean();
+        if (customer != null) {
+
+            form.setFirstName(customer.getFirstName());
+            form.setLastName(customer.getLastName());
+            form.setCity(customer.getCity());
+            form.setPhone(customer.getPhone());
+            form.setId(customer.getId());
+            form.setImageUrl(customer.getImageUrl());
+        } else {
+            log.warn(" customer with id " + customerId + " NOT found");
+        }
+        response.addObject("form", form);
+
+        return response;
+    }
+
 }
 

@@ -30,6 +30,9 @@ public class Customer {
     @Column(name="image_url")
     private String imageUrl;
 
+    @Column(name="user_id")
+    private Integer userId;
+
     @Override
     public String toString() {
         return "Customer{" +
@@ -38,6 +41,8 @@ public class Customer {
                 ", lastName='" + lastName + '\'' +
                 ", phone='" + phone + '\'' +
                 ", city='" + city + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", userId=" + userId +
                 '}';
     }
 }

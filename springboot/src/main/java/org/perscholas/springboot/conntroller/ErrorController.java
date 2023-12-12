@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,5 +33,13 @@ public class ErrorController {
         return response;
     }
 
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ModelAndView missingRequestParameterException(HttpServletRequest request, Exception ex) {
+        ModelAndView response = new ModelAndView("error/404");
+
+        log.warn("User requested url that they do not have important request parameters " + request.getRequestURL());
+
+        return response;
+    }
 
 }
