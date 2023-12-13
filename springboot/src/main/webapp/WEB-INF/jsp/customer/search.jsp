@@ -42,6 +42,7 @@
                 <td>Image</td>
                 <td>Edit</td>
                 <td>Detail</td>
+                <td>Upload</td>
             </tr>
         <c:forEach items="${customersVar}" var="customer">
             <tr>
@@ -52,6 +53,7 @@
                 <td><img src="${customer.imageUrl}" style="max-width: 100px"></td>
                 <td><a href="/customer/edit/${customer.id}">Edit</a></td>
                 <td><a href="/customer/detail/?customerId=${customer.id}">Detail</a></td>
+                <td><a href="/customer/fileupload?id=${customer.id}">Upload</a></td>
             </tr>
         </c:forEach>
           </table>

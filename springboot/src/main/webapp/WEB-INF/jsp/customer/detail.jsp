@@ -18,9 +18,9 @@
             <div class="col-lg-3">
                 <div class="card mb-4">
                     <div class="card-body text-center">
-                        <img src="${form.imageUrl}" alt="avatar"
+                        <img src="${customer.imageUrl}" alt="avatar"
                              class="rounded-circle img-fluid" style="width: 180px;">
-                        <h5 class="my-3">${form.firstName} ${form.lastName}</h5>
+                        <h5 class="my-3">${customer.firstName} ${customer.lastName}</h5>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                                 <p class="mb-0">First Name</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">${form.firstName}</p>
+                                <p class="text-muted mb-0">${customer.firstName}</p>
                             </div>
                         </div>
 
@@ -45,7 +45,7 @@
                                 <p class="mb-0">Last Name</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">${form.lastName}</p>
+                                <p class="text-muted mb-0">${customer.lastName}</p>
                             </div>
                         </div>
                         <hr>
@@ -55,7 +55,7 @@
                                 <p class="mb-0">Phone</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">${form.phone}</p>
+                                <p class="text-muted mb-0">${customer.phone}</p>
                             </div>
                         </div>
                         <hr>
@@ -65,7 +65,7 @@
                                 <p class="mb-0">City</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">${form.city}</p>
+                                <p class="text-muted mb-0">${customer.city}</p>
                             </div>
                         </div>
 
@@ -74,7 +74,7 @@
                         <div class="row">
                             <div class="col-sm-3"></div>
                             <div class="col-sm-9">
-                                <a href='/customer/edit/${form.id}' class='btn btn-primary '>Edit</a>
+                                <a href='/customer/edit/${customer.id}' class='btn btn-primary '>Edit</a>
                             </div>
                         </div>
                     </div>

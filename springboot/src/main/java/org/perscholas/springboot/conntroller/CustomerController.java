@@ -2,6 +2,7 @@ package org.perscholas.springboot.conntroller;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.perscholas.springboot.database.dao.CustomerDAO;
 import org.perscholas.springboot.database.entity.Customer;
 import org.perscholas.springboot.database.entity.Employee;
@@ -16,10 +17,19 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.naming.Binding;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 
@@ -198,11 +208,11 @@ public class CustomerController {
         // 3) use the authenticated user id to find a list of all customers created by this user
         // 4) loop over the customers created and log.debug the customer id and customer last name
 
-        User user =authenticatedUserService.loadCurrentUser();
-        log.debug("user id "+user.getId());
+        User user = authenticatedUserService.loadCurrentUser();
+        log.debug("user id " + user.getId());
         List<Customer> customers = customerDAO.findByUserId(user.getId());
-        log.info("Size employees "+customers.size());
-        for (Customer customer: customers) {
+        log.info("Size employees " + customers.size());
+        for (Customer customer : customers) {
             log.debug(customer.toString());
         }
         log.info("######################### end my myCustomers #########################");
@@ -216,27 +226,54 @@ public class CustomerController {
         log.info("######################### In /customer/detail #########################");
         ModelAndView response = new ModelAndView("customer/detail");
         log.info("+++++++++++++++++In edit  customer with id " + customerId);
-        if (customerId==null )
-            return response;
+
         Customer customer = customerDAO.findById(customerId);
-
-
-        CreateCustomerFormBean form = new CreateCustomerFormBean();
-        if (customer != null) {
-
-            form.setFirstName(customer.getFirstName());
-            form.setLastName(customer.getLastName());
-            form.setCity(customer.getCity());
-            form.setPhone(customer.getPhone());
-            form.setId(customer.getId());
-            form.setImageUrl(customer.getImageUrl());
-        } else {
-            log.warn(" customer with id " + customerId + " NOT found");
+        if (customerId == null) {
+            log.info("customer with id " + customerId + " not found");
+            response.setViewName("redirect:/error/404");
+            return response;
         }
-        response.addObject("form", form);
 
+        response.addObject("customer", customer);
         return response;
     }
 
+    @GetMapping("/customer/fileupload")
+    public ModelAndView fileUpload(@RequestParam Integer id) {
+        ModelAndView response = new ModelAndView("customer/fileupload");
+        log.info(" In fileupload ");
+        Customer customer =customerDAO.findById(id);
+        response.addObject("customer", customer);
+        return response;
+    }
+
+    @PostMapping("/customer/fileUploadSubmit")
+    public ModelAndView fileUploadSubmit(@RequestParam("file") MultipartFile file, @RequestParam Integer id) {
+        ModelAndView response = new ModelAndView("redirect:/customer/detail/?customerId="+id);
+        log.info("+++++++++++++++++++ In fileupload +++++++++++++++++++++++++");
+        log.info(" In fileupload name " + file.getName());
+        log.info(" In fileupload size " + file.getSize());
+
+// Get the file and save it somewhere -1 example
+//        try {
+//            byte[] bytes = file.getBytes();
+//            Path path = Paths.get("./src/main/webapp/pub/images/" + file.getOriginalFilename());
+//            Files.write(path, bytes);
+
+        Customer customer =customerDAO.findById(id);
+//        response.addObject("customer", customer);
+
+// Get the file and save it somewhere  - 2 example
+        File f = new File("./src/main/webapp/pub/images/" + file.getOriginalFilename());
+        try (OutputStream outputStream = new FileOutputStream(f.getAbsolutePath())) {
+            IOUtils.copy(file.getInputStream(), outputStream);
+            customer.setImageUrl("/pub/images/"+file.getOriginalFilename());
+            customerDAO.save(customer);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
 }
 
