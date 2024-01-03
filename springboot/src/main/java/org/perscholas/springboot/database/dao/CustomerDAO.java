@@ -2,8 +2,10 @@ package org.perscholas.springboot.database.dao;
 
 import org.perscholas.springboot.database.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,14 +14,20 @@ public interface CustomerDAO extends JpaRepository<Customer, Long> {
 
     public Customer findById(Integer id);
 
-    public Customer deleteById(Integer id);
+    @Transactional
+    void deleteById(Integer id);
 
+    @Modifying
+    @Transactional
+    int deleteByFirstName(String name);
+
+    List<Customer> findByFirstNameOrLastName(String fName, String lName);
 
     @Query("select c from Customer c where c.firstName=:firstName")
-    public List<Customer> findByFirstName(String firstName);
+    List<Customer> findByFirstName(String firstName);
 
     @Query("select c from Customer c where c.firstName like :firstName or c.lastName like :lastName ")
-    public List<Customer> findByFullName(String firstName, String lastName);
+    List<Customer> findByFullName(String firstName, String lastName);
 
-    public List<Customer> findByUserId(Integer userId);
+    List<Customer> findByUserId(Integer userId);
 }

@@ -9,10 +9,10 @@ import java.util.List;
 public interface EmployeeDAO extends JpaRepository<Employee, Long> {
 
     @Query("select e from Employee e where e.firstName like :firstName or e.lastName like :lastName ")
-    public List<Employee> findByFullName (String firstName, String lastName);
+    List<Employee> findByFullName (String firstName, String lastName);
 
-    public Employee findById (Integer id);
+    Employee findById (Integer id);
 
-    public List<Employee> findByUserId (Integer userId);
+    List<Employee> findByUserId (Integer userId);
 
 }
